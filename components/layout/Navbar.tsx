@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown, Package } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -43,20 +44,17 @@ export function Navbar() {
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-2.5 flex-shrink-0"
+            className="flex items-center flex-shrink-0"
             aria-label="Kriti Print & Pack Industries"
           >
-            <div className="w-8 h-8 bg-brand-blue rounded-md flex items-center justify-center flex-shrink-0">
-              <Package className="w-5 h-5 text-white" />
-            </div>
-            <div className="leading-tight">
-              <span className="block font-display font-bold text-brand-gray-dark text-sm leading-none">
-                KRITI
-              </span>
-              <span className="block text-brand-blue text-xs font-semibold tracking-wider leading-none mt-0.5">
-                PRINT & PACK
-              </span>
-            </div>
+            <Image 
+              src="/logo.png" 
+              alt="Kriti Print & Pack Logo" 
+              width={240} 
+              height={64} 
+              className="h-16 w-auto object-contain"
+              priority
+            />
           </Link>
 
           {/* Desktop Navigation */}

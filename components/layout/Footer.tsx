@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   Package,
   MapPin,
@@ -36,18 +37,14 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Company Info */}
           <div className="lg:col-span-1">
-            <Link href="/" className="flex items-center gap-2.5 mb-5">
-              <div className="w-8 h-8 bg-brand-blue rounded-md flex items-center justify-center flex-shrink-0">
-                <Package className="w-5 h-5 text-white" />
-              </div>
-              <div className="leading-tight">
-                <span className="block font-display font-bold text-brand-gray-dark text-sm leading-none">
-                  KRITI
-                </span>
-                <span className="block text-brand-blue text-xs font-semibold tracking-wider leading-none mt-0.5">
-                  PRINT & PACK
-                </span>
-              </div>
+            <Link href="/" className="flex items-center mb-5">
+              <Image 
+                src="/logo.png" 
+                alt="Kriti Print & Pack Logo" 
+                width={240} 
+                height={64} 
+                className="h-16 w-auto object-contain"
+              />
             </Link>
             <p className="text-brand-gray text-sm leading-relaxed mb-6">
               Professional printing and packaging solutions for FMCG, food, industrial, and
