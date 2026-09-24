@@ -1,11 +1,23 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, CheckCircle2, ArrowRight } from "lucide-react";
+import Image from "next/image";
+import { ArrowLeft, CheckCircle2, ArrowRight, Layers, Printer, Weight, Package, Star, Droplet, Settings } from "lucide-react";
 import { getProductBySlug, products, PRODUCT_CATEGORIES } from "@/data/products";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+
+function getSpecIcon(key: string) {
+  const k = key.toLowerCase();
+  if (k.includes("board") || k.includes("material") || k.includes("flute")) return <Layers className="w-5 h-5 text-brand-orange" />;
+  if (k.includes("printing") || k.includes("ink")) return <Printer className="w-5 h-5 text-brand-orange" />;
+  if (k.includes("strength") || k.includes("ect") || k.includes("load") || k.includes("weight")) return <Weight className="w-5 h-5 text-brand-orange" />;
+  if (k.includes("moq") || k.includes("pack") || k.includes("config")) return <Package className="w-5 h-5 text-brand-orange" />;
+  if (k.includes("cert")) return <Star className="w-5 h-5 text-brand-orange" />;
+  if (k.includes("coat") || k.includes("finish") || k.includes("closure")) return <Droplet className="w-5 h-5 text-brand-orange" />;
+  return <Settings className="w-5 h-5 text-brand-orange" />;
+}
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -63,23 +75,15 @@ export default async function ProductDetailPage({ params }: Props) {
         <Container>
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             {/* Product image */}
-            <div className="rounded-2xl overflow-hidden bg-brand-navy-light border border-white/10 aspect-[4/3] flex items-center justify-center">
-              <div className="text-center p-8">
-                <div className="w-24 h-24 bg-brand-orange/20 rounded-2xl border border-brand-orange/30 flex items-center justify-center mx-auto mb-4">
-                  <svg
-                    viewBox="0 0 48 48"
-                    className="w-12 h-12 text-brand-orange"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                  >
-                    <rect x="4" y="20" width="40" height="24" rx="2" />
-                    <path d="M4 28h40M16 20V12a8 8 0 0116 0v8" />
-                  </svg>
-                </div>
-                <p className="text-white font-medium">{product.name}</p>
-                <p className="text-gray-400 text-sm mt-1">Product Image Coming Soon</p>
-              </div>
+            <div className="relative rounded-2xl overflow-hidden bg-white border border-white/10 aspect-[4/3] shadow-xl">
+              <Image
+                src={product.image}
+                alt={product.name}
+                fill
+                priority
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
             </div>
 
             {/* Product info */}
@@ -142,14 +146,19 @@ export default async function ProductDetailPage({ params }: Props) {
             {product.specifications && (
               <div className="lg:col-span-1">
                 <h2 className="font-display font-bold text-brand-gray-dark text-xl mb-5">Specifications</h2>
-                <div className="bg-brand-gray-light rounded-xl overflow-hidden border border-gray-100">
-                  {Object.entries(product.specifications).map(([key, value], i) => (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3">
+                  {Object.entries(product.specifications).map(([key, value]) => (
                     <div
                       key={key}
-                      className={`flex justify-between gap-4 px-4 py-3 text-sm ${i % 2 === 0 ? "bg-white" : "bg-brand-gray-light"}`}
+                      className="flex items-start gap-4 p-4 rounded-xl border border-gray-100 bg-white hover:border-brand-orange/30 hover:shadow-sm transition-all"
                     >
-                      <span className="font-medium text-brand-gray-dark">{key}</span>
-                      <span className="text-brand-gray text-right">{value}</span>
+                      <div className="w-10 h-10 rounded-lg bg-brand-orange/10 flex items-center justify-center flex-shrink-0">
+                        {getSpecIcon(key)}
+                      </div>
+                      <div>
+                        <p className="text-[11px] font-bold text-brand-gray-dark uppercase tracking-wider mb-1">{key}</p>
+                        <p className="text-sm text-brand-gray font-medium">{value}</p>
+                      </div>
                     </div>
                   ))}
                 </div>
