@@ -48,7 +48,7 @@ export default function PortfolioPage() {
                   : "bg-white text-brand-gray border border-gray-200 hover:border-brand-navy hover:text-brand-gray-dark"
               )}
             >
-              All Projects ({portfolioItems.length})
+              All Projects
             </button>
             {PORTFOLIO_CATEGORIES.map((cat) => {
               const count = portfolioItems.filter((p) => p.category === cat.value).length;
@@ -64,7 +64,7 @@ export default function PortfolioPage() {
                       : "bg-white text-brand-gray border border-gray-200 hover:border-brand-orange hover:text-brand-orange"
                   )}
                 >
-                  {cat.label} ({count})
+                  {cat.label}
                 </button>
               );
             })}

@@ -49,7 +49,7 @@ export default function ProductsPage() {
                   : "bg-white text-brand-gray border border-gray-200 hover:border-brand-navy hover:text-brand-gray-dark"
               )}
             >
-              All Products ({products.length})
+              All Products
             </button>
             {PRODUCT_CATEGORIES.map((cat) => {
               const count = products.filter((p) => p.category === cat.value).length;
@@ -64,7 +64,7 @@ export default function ProductsPage() {
                       : "bg-white text-brand-gray border border-gray-200 hover:border-brand-orange hover:text-brand-orange"
                   )}
                 >
-                  {cat.label} ({count})
+                  {cat.label}
                 </button>
               );
             })}

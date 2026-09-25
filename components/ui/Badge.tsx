@@ -10,9 +10,9 @@ interface BadgeProps {
 export function Badge({ children, variant = "default", size = "sm", className }: BadgeProps) {
   const variantClasses = {
     default: "bg-brand-gray-light text-brand-gray-dark",
-    blue: "bg-brand-blue/10 text-brand-blue",
-    orange: "bg-brand-orange/10 text-brand-orange",
-    navy: "bg-brand-navy/10 text-brand-gray-dark",
+    blue: "bg-brand-blue text-white shadow-sm",
+    orange: "bg-brand-orange text-white shadow-sm",
+    navy: "bg-brand-navy text-white shadow-sm",
     green: "bg-emerald-50 text-emerald-700",
     gray: "bg-gray-100 text-gray-600",
   };
